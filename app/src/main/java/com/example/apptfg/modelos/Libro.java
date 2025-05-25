@@ -1,10 +1,23 @@
 package com.example.apptfg.modelos;
+
 import java.util.List;
+
 public class Libro {
-    private String titulo, descripcion, archivo;
+    private String id;
+    private String titulo;
+    private String autor;
     private List<Pagina> paginas;
-    private List<Pregunta> preguntas;
-    public String getTitulo(){return titulo;} public String getDescripcion(){return descripcion;} public String getArchivo(){return archivo;}
-    public void setDescripcion(String d){descripcion=d;} public void setArchivo(String a){archivo=a;}
-    public List<Pagina> getPaginas(){return paginas;} public List<Pregunta> getPreguntas(){return preguntas;}
+
+    public Libro(String id, String titulo, String autor, List<Pagina> paginas) {
+        this.id = id;
+        this.titulo = titulo;
+        this.autor = autor;
+        this.paginas = paginas;
+    }
+
+    // Getters
+    public String getId() { return id; }
+    public String getTitulo() { return titulo; }
+    public String getAutor() { return autor; }
+    public List<Pagina> getPaginas() { return paginas; }
 }

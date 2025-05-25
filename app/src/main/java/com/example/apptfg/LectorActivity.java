@@ -4,46 +4,67 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.apptfg.modelos.Libro;
-import com.example.apptfg.modelos.Pagina;
-import com.example.apptfg.modelos.Opcion;
-import com.example.apptfg.util.LectorDeLibros;
+
+import com.example.apptfg.modelos.*;
+import com.example.apptfg.util.GestorDePuntos;
+
+import java.util.List;
 
 public class LectorActivity extends AppCompatActivity {
-    private Libro libro;
-    private String nombreLibro;
-    private int paginaActual;
 
-    @Override protected void onCreate(Bundle b) {
-        super.onCreate(b);
-        nombreLibro = getIntent().getStringExtra("libro");
-        libro = LectorDeLibros.cargar(this, nombreLibro);
-        paginaActual = 0;
+    private List<Pagina> paginas;
+    private int paginaActual = 0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_lector);
+
+        String id = getIntent().getStringExtra("libroId");
+        Libro libro = LibroRepository.obtenerLibros().stream()
+                .filter(l -> l.getId().equals(id)).findFirst().orElse(null);
+        paginas = libro.getPaginas();
+
         mostrarPagina();
     }
+
     private void mostrarPagina() {
-        Pagina p = libro.getPaginas().get(paginaActual);
-        ScrollView sv = new ScrollView(this);
-        LinearLayout ll = new LinearLayout(this);
-        ll.setOrientation(LinearLayout.VERTICAL);
-        ll.setPadding(40,40,40,40);
-        TextView tv = new TextView(this);
-        tv.setText(p.getTexto()); tv.setTextSize(18);
-        ll.addView(tv);
+        TextView tv = findViewById(R.id.tvContenido);
+        LinearLayout ll = findViewById(R.id.llOpciones);
+        ll.removeAllViews();
+
+        Pagina p = paginas.get(paginaActual);
+        tv.setText(p.getContenido());
+
         for (Opcion op : p.getOpciones()) {
-            Button b = new Button(this); b.setText(op.getTexto());
-            b.setOnClickListener(v -> {
-                paginaActual = op.getSiguiente();
-                if (paginaActual>=libro.getPaginas().size()) {
-                    Intent i=new Intent(this,PreguntasActivity.class);
-                    i.putExtra("libro",nombreLibro);
-                    startActivity(i); finish();
-                } else mostrarPagina();
-            }); ll.addView(b);
+            Button btn = new Button(this);
+            btn.setText(op.getTexto());
+            btn.setOnClickListener(v -> {
+                GestorDePuntos.sumar(1);
+                paginaActual = op.getSiguientePagina();
+                if (paginaActual >= paginas.size()) {
+                    lanzarPreguntas();
+                } else {
+                    mostrarPagina();
+                }
+            });
+            ll.addView(btn);
         }
-        sv.addView(ll); setContentView(sv);
+
+        if (p.getOpciones().isEmpty()) {
+            Button btn = new Button(this);
+            btn.setText("Continuar");
+            btn.setOnClickListener(v -> lanzarPreguntas());
+            ll.addView(btn);
+        }
+    }
+
+    private void lanzarPreguntas() {
+        Intent i = new Intent(this, PreguntasActivity.class);
+        i.putExtra("libroId", getIntent().getStringArrayExtra("libroId"));
+        startActivity(i);
+        finish();
     }
 }

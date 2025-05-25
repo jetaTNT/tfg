@@ -3,44 +3,49 @@ package com.example.apptfg;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.apptfg.modelos.Libro;
 import java.util.List;
+import com.example.apptfg.modelos.*;
 
-public class LibrosAdapter extends RecyclerView.Adapter<LibrosAdapter.VH> {
-    public interface OnClickListener { void onClick(Libro libro); }
-    private List<Libro> lista;
-    private OnClickListener listener;
+public class LibrosAdapter extends RecyclerView.Adapter<LibrosAdapter.LibroViewHolder> {
 
-    public LibrosAdapter(List<Libro> lista, OnClickListener listener) {
-        this.lista = lista;
+    public interface OnLibroClickListener { void onLibroClick(Libro libro); }
+
+    private List<Libro> libros;
+    private OnLibroClickListener listener;
+
+    public LibrosAdapter(List<Libro> libros, OnLibroClickListener listener) {
+        this.libros = libros;
         this.listener = listener;
     }
 
-    public static class VH extends RecyclerView.ViewHolder {
-        ImageView portada;
-        TextView titulo, desc;
-        public VH(View item) {
-            super(item);
-            portada = item.findViewById(R.id.iv_portada);
-            titulo = item.findViewById(R.id.tv_titulo);
-            desc = item.findViewById(R.id.tv_descripcion);
-        }
+    @NonNull
+    @Override
+    public LibroViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_libro, parent, false);
+        return new LibroViewHolder(v);
     }
 
-    @Override public VH onCreateViewHolder(ViewGroup p, int vt) {
-        View v = LayoutInflater.from(p.getContext())
-                .inflate(R.layout.item_libro, p, false);
-        return new VH(v);
+    @Override
+    public void onBindViewHolder(@NonNull LibroViewHolder holder, int position) {
+        Libro libro = libros.get(position);
+        holder.tvTitulo.setText(libro.getTitulo());
+        holder.tvAutor.setText(libro.getAutor());
+        holder.itemView.setOnClickListener(v -> listener.onLibroClick(libro));
     }
-    @Override public void onBindViewHolder(VH h, int pos) {
-        Libro l = lista.get(pos);
-        h.titulo.setText(l.getTitulo());
-        h.desc.setText(l.getDescripcion());
-        h.portada.setImageResource(R.drawable.ic_launcher_background);
-        h.itemView.setOnClickListener(v -> listener.onClick(l));
+
+    @Override
+    public int getItemCount() { return libros.size(); }
+
+    static class LibroViewHolder extends RecyclerView.ViewHolder {
+        TextView tvTitulo, tvAutor;
+        LibroViewHolder(@NonNull View itemView) {
+            super(itemView);
+            tvTitulo = itemView.findViewById(R.id.tvTitulo);
+            tvAutor = itemView.findViewById(R.id.tvAutor);
+        }
     }
-    @Override public int getItemCount() { return lista.size(); }
 }
