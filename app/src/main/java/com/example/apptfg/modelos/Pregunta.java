@@ -3,17 +3,17 @@ package com.example.apptfg.modelos;
 import java.util.List;
 
 public class Pregunta {
-    private String texto;
+    private String pregunta;
     private List<String> respuestas;
-    private int correcta;
+    private int correcta; // índice 0-based
 
-    public Pregunta(String texto, List<String> respuestas, int correcta) {
-        this.texto = texto;
+    public Pregunta(String pregunta, List<String> respuestas, int correcta) {
+        this.pregunta = pregunta;
         this.respuestas = respuestas;
         this.correcta = correcta;
     }
 
-    public String getTexto() { return texto; }
+    public String getPregunta() { return pregunta; }
     public List<String> getRespuestas() { return respuestas; }
     public int getCorrecta() { return correcta; }
 }

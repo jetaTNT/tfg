@@ -1,29 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="16dp"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".PreguntasActivity">
+
+    <TextView
+        android:id="@+id/tvPuntos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Puntos: 0"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvPregunta"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <RadioGroup
-        android:id="@+id/rgRespuestas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="16dp" />
-
-    <Button
-        android:id="@+id/btnEnviar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Enviar"
+        android:text="¿Pregunta?"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/tvPuntos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="24dp" />
 
-</LinearLayout>
+    <Button
+        android:id="@+id/btnOpcion1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Opción 1"
+        app:layout_constraintTop_toBottomOf="@id/tvPregunta"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnOpcion2"
+        app:layout_constraintHorizontal_weight="1"
+        android:layout_marginEnd="8dp" />
+
+    <Button
+        android:id="@+id/btnOpcion2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Opción 2"
+        app:layout_constraintTop_toBottomOf="@id/tvPregunta"
+        app:layout_constraintStart_toEndOf="@id/btnOpcion1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        android:layout_marginStart="8dp" />
+
+    <Button
+        android:id="@+id/btnOpcion3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Opción 3"
+        app:layout_constraintTop_toBottomOf="@id/btnOpcion1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnOpcion4"
+        app:layout_constraintHorizontal_weight="1"
+        android:layout_marginEnd="8dp" />
+
+    <Button
+        android:id="@+id/btnOpcion4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Opción 4"
+        app:layout_constraintTop_toBottomOf="@id/btnOpcion2"
+        app:layout_constraintStart_toEndOf="@id/btnOpcion3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        android:layout_marginStart="8dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,42 +1,64 @@
 package com.example.apptfg;
 
-
 import com.example.apptfg.modelos.*;
+import com.example.apptfg.util.*;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Provee libros y sus páginas. En real, cargarías JSON o BD.
+ */
 public class LibroRepository {
-
     public static List<Libro> obtenerLibros() {
-        Pagina p0 = new Pagina(
-                "Érase una vez un bosque misterioso... ¿Quieres entrar?",
-                Arrays.asList(
-                        new Opcion("Sí, entro al bosque", 1),
-                        new Opcion("No, me doy la vuelta", 2)
-                ));
-        Pagina p1 = new Pagina(
-                "Dentro del bosque ves una cabaña. ¿Qué haces?",
-                Arrays.asList(
-                        new Opcion("Tocar la puerta", 2),
-                        new Opcion("Entrar sigilosamente", 2)
-                ));
-        Pagina p2 = new Pagina(
-                "Fin del cuento. ¡Gracias por jugar!",
-                Arrays.asList()
-        );
-
-        Libro cuento = new Libro("cuento1", "El bosque misterioso", "Autor Desconocido",
-                Arrays.asList(p0, p1, p2));
-
-        return Arrays.asList(cuento);
+        List<Libro> lista = new ArrayList<>();
+        // Libro 1: "El león y el ratón"
+        lista.add(new Libro(
+                1,
+                "El león y el ratón",
+                generarPaginasLeonYRaton()
+        ));
+        // Libro 2: "La liebre y la tortuga"
+        lista.add(new Libro(
+                2,
+                "La liebre y la tortuga",
+                generarPaginasLiebreYTortuga()
+        ));
+        return lista;
     }
 
-    public static Pregunta obtenerPreguntaFinal(String libroId) {
-        return new Pregunta(
-                "¿Te gustó el final del cuento?",
-                Arrays.asList("Sí", "No", "Quizá"),
-                0
-        );
+    private static List<Pagina> generarPaginasLeonYRaton() {
+        List<Pagina> p = new ArrayList<>();
+        p.add(new Pagina(1,
+                "Un día de verano, un león dormía plácidamente en la selva. Un pequeño ratón pasó por encima de su cuerpo sin darse cuenta de su presencia.",
+                0));
+        p.add(new Pagina(2,
+                "El ratón, al despertarle un leve cosquilleo, corrió asustado y despertó al león, quien lo atrapó con su garra.",
+                0));
+        p.add(new Pagina(3,
+                "El ratón rogó por su vida y prometió ayudar al león algún día. El león, divertido, lo dejó libre. Más tarde, el león cayó en una red de cazadores y fue liberado por el ratón.",
+                0));
+        return p;
+    }
+
+    private static List<Pagina> generarPaginasLiebreYTortuga() {
+        List<Pagina> p = new ArrayList<>();
+        p.add(new Pagina(1,
+                "La liebre alardeaba de su velocidad, burlándose de la tortuga lenta. Cansada de burlas, la tortuga la desafió a una carrera.",
+                0));
+        p.add(new Pagina(2,
+                "La liebre salió disparada y, confiada en su victoria, decidió descansar a mitad de camino. Mientras tanto, la tortuga avanzaba despacio pero sin detenerse.",
+                0));
+        p.add(new Pagina(3,
+                "Al despertar, la liebre vio que la tortuga estaba a punto de cruzar la meta. Corrió pero no alcanzó. La tortuga ganó la carrera.",
+                0));
+        return p;
+    }
+
+    public static Libro obtenerPorId(int id) {
+        for (Libro l : obtenerLibros()) {
+            if (l.getId() == id) return l;
+        }
+        return null;
     }
 }

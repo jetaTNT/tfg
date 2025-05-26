@@ -2,69 +2,55 @@ package com.example.apptfg;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.apptfg.modelos.*;
 import com.example.apptfg.util.GestorDePuntos;
-
 import java.util.List;
 
 public class LectorActivity extends AppCompatActivity {
-
+    private int libroId;
     private List<Pagina> paginas;
-    private int paginaActual = 0;
+    private int paginaIndex = 0;
+    private TextView tvPuntos, tvPagina;
+    private Button btnSiguiente;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle s) {
+        super.onCreate(s);
+        libroId = getIntent().getIntExtra("libroId", -1);
+        if (libroId==-1) { Log.e("LectorAct","libroId faltante"); finish(); return; }
         setContentView(R.layout.activity_lector);
 
-        String id = getIntent().getStringExtra("libroId");
-        Libro libro = LibroRepository.obtenerLibros().stream()
-                .filter(l -> l.getId().equals(id)).findFirst().orElse(null);
-        paginas = libro.getPaginas();
+        GestorDePuntos.init(this);
+        tvPuntos = findViewById(R.id.tvPuntos);
+        tvPagina  = findViewById(R.id.tvPagina);
+        btnSiguiente = findViewById(R.id.btnSiguiente);
+
+        Libro libro = LibroRepository.obtenerPorId(libroId);
+        paginas = (libro!=null? libro.getPaginas(): null);
+        if (paginas==null||paginas.isEmpty()) { Log.e("LectorAct","sin páginas"); finish(); return; }
 
         mostrarPagina();
+        btnSiguiente.setOnClickListener(v -> {
+            paginaIndex++;
+            if (paginaIndex < paginas.size()) {
+                mostrarPagina();
+            } else {
+                // Al terminar, ir a PreguntasActivity
+                Intent i = new Intent(this, PreguntasActivity.class);
+                i.putExtra("libroId", libroId);
+                startActivity(i);
+                finish();
+            }
+        });
     }
 
     private void mostrarPagina() {
-        TextView tv = findViewById(R.id.tvContenido);
-        LinearLayout ll = findViewById(R.id.llOpciones);
-        ll.removeAllViews();
-
-        Pagina p = paginas.get(paginaActual);
-        tv.setText(p.getContenido());
-
-        for (Opcion op : p.getOpciones()) {
-            Button btn = new Button(this);
-            btn.setText(op.getTexto());
-            btn.setOnClickListener(v -> {
-                GestorDePuntos.sumar(1);
-                paginaActual = op.getSiguientePagina();
-                if (paginaActual >= paginas.size()) {
-                    lanzarPreguntas();
-                } else {
-                    mostrarPagina();
-                }
-            });
-            ll.addView(btn);
-        }
-
-        if (p.getOpciones().isEmpty()) {
-            Button btn = new Button(this);
-            btn.setText("Continuar");
-            btn.setOnClickListener(v -> lanzarPreguntas());
-            ll.addView(btn);
-        }
-    }
-
-    private void lanzarPreguntas() {
-        Intent i = new Intent(this, PreguntasActivity.class);
-        i.putExtra("libroId", getIntent().getStringArrayExtra("libroId"));
-        startActivity(i);
-        finish();
+        Pagina p = paginas.get(paginaIndex);
+        tvPagina.setText(p.getTexto());
+        tvPuntos.setText("Puntos: " + GestorDePuntos.obtenerPuntos());
     }
 }

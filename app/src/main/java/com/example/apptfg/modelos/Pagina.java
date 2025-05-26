@@ -1,16 +1,20 @@
 package com.example.apptfg.modelos;
 
-import java.util.List;
-
+/**
+ * Representa una página de un libro interactivo.
+ */
 public class Pagina {
-    private String contenido;
-    private List<Opcion> opciones;
+    private int numero;
+    private String texto;
+    // Opcional: recurso de imagen para la página
+    private int imagenResId;
 
-    public Pagina(String contenido, List<Opcion> opciones) {
-        this.contenido = contenido;
-        this.opciones = opciones;
+    public Pagina(int numero, String texto, int imagenResId) {
+        this.numero = numero;
+        this.texto = texto;
+        this.imagenResId = imagenResId;
     }
-
-    public String getContenido() { return contenido; }
-    public List<Opcion> getOpciones() { return opciones; }
+    public int getNumero() { return numero; }
+    public String getTexto() { return texto; }
+    public int getImagenResId() { return imagenResId; }
 }

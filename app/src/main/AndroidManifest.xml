@@ -3,17 +3,14 @@
 
     <application
         android:allowBackup="true"
-        android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.appTFG">
 
-        <!-- Pantalla de preguntas -->
         <activity android:name=".PreguntasActivity" />
-        <!-- Lector de páginas -->
         <activity android:name=".LectorActivity" />
-        <!-- Pantalla principal -->
         <activity android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -21,6 +18,5 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 </manifest>
