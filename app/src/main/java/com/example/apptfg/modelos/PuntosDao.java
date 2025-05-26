@@ -7,7 +7,6 @@ import androidx.room.Query;
 
 @Dao
 public interface PuntosDao {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void guardarPuntos(Puntos puntos);
 
