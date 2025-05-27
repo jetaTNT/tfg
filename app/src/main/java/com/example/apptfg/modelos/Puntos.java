@@ -3,6 +3,9 @@ package com.example.apptfg.modelos;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+/**
+ * Representa los puntos al contestar bien las preguntas
+ */
 @Entity
 public class Puntos {
     @PrimaryKey public int id = 1;

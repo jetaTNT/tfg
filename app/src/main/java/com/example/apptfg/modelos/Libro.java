@@ -3,7 +3,7 @@ package com.example.apptfg.modelos;
 import java.util.List;
 
 /**
- * Representa un libro con su lista de páginas.
+ * Representa un libro.
  */
 public class Libro {
     private int id;

@@ -1,7 +1,7 @@
 package com.example.apptfg.modelos;
 
 /**
- * Representa una página de un libro interactivo.
+ * Representa una página.
  */
 public class Pagina {
     private int numero;

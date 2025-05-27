@@ -2,6 +2,9 @@ package com.example.apptfg.modelos;
 
 import java.util.List;
 
+/**
+ * Representa las preguntas de despues del libro
+ */
 public class Pregunta {
     private String pregunta;
     private List<String> respuestas;
