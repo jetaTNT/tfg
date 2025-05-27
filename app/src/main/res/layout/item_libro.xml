@@ -1,83 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="4dp"
-    app:cardBackgroundColor="@android:color/white"
+    card_view:cardCornerRadius="20dp"
+    card_view:cardElevation="6dp"
+    card_view:cardBackgroundColor="#FFE0B2"
     android:foreground="?android:attr/selectableItemBackground"
     android:clickable="true"
     android:focusable="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
 
-        <!-- Icono del libro -->
+        <!-- Icono del libro con emoticono -->
         <TextView
-            android:id="@+id/ivBookIcon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:text="📚"
-            android:textSize="32sp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:text="📖"
+            android:textSize="30sp"
             android:gravity="center"
-            android:background="@drawable/circulo"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            android:background="#FFFFFF"
+            android:layout_marginEnd="16dp" />
 
-        <!-- Contenedor del texto -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintStart_toEndOf="@id/ivBookIcon"
-            app:layout_constraintEnd_toStartOf="@id/ivArrow"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
+            <!-- ID CORREGIDO: tvTitulo -> tvTituloLibro -->
             <TextView
-                android:id="@+id/tvTitulo"
-                android:layout_width="match_parent"
+                android:id="@+id/tvTituloLibro"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Título"
-                android:textSize="16sp"
+                android:text="Nombre del Libro"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="#212121"
-                android:maxLines="2"
-                android:ellipsize="end" />
+                android:textColor="#5D4037"
+                android:fontFamily="@font/baloo" />
 
             <TextView
-                android:id="@+id/tvSubtitle"
-                android:layout_width="match_parent"
+                android:id="@+id/tvDescripcionLibro"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Toca para leer"
-                android:textSize="12sp"
-                android:textColor="#757575"
-                android:layout_marginTop="4dp"
-                android:alpha="0.7" />
+                android:text="Descripción corta del libro"
+                android:textSize="16sp"
+                android:textColor="#6D4C41"
+                android:fontFamily="@font/baloo"
+                android:layout_marginTop="4dp" />
 
         </LinearLayout>
 
         <!-- Flecha indicadora -->
         <TextView
-            android:id="@+id/ivArrow"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:text="▶"
-            android:textSize="16sp"
-            android:textColor="#FF9800"
-            android:gravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="▶️"
+            android:textSize="20sp"
+            android:layout_marginStart="8dp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

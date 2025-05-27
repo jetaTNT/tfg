@@ -53,6 +53,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void actualizarPuntos() {
         int pts = GestorDePuntos.obtenerPuntos();
-        tvPuntosMain.setText("Puntos: " + pts);
+        tvPuntosMain.setText("⭐ Puntos: " + pts);
     }
 }

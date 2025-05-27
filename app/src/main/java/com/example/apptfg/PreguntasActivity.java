@@ -60,7 +60,7 @@ public class PreguntasActivity extends AppCompatActivity {
         }
 
         // 5) Mostrar puntos actuales en pantalla
-        tvPuntos.setText("Puntos: " + GestorDePuntos.obtenerPuntos());
+        tvPuntos.setText("⭐ Puntos: " + GestorDePuntos.obtenerPuntos());
 
         // 6) Mostrar la primera pregunta
         mostrarPregunta();
@@ -79,23 +79,25 @@ public class PreguntasActivity extends AppCompatActivity {
             // 8) Sumar y guardar los puntos en Room
             GestorDePuntos.sumarPuntos(puntosGanados);
 
-            // 9) Mostrar toast según resultado
+            // 9) Mostrar toast según resultado con emoticonos
             Toast.makeText(
                     this,
                     puntosGanados > 0
-                            ? "¡Correcto! +" + puntosGanados + " puntos"
-                            : "Incorrecto",
+                            ? "🎉 ¡Correcto! +" + puntosGanados + " puntos ⭐"
+                            : "❌ Incorrecto, ¡sigue intentando! 💪",
                     Toast.LENGTH_SHORT
             ).show();
 
             // 10) Actualizar el contador en pantalla
-            tvPuntos.setText("Puntos: " + GestorDePuntos.obtenerPuntos());
+            tvPuntos.setText("⭐ Puntos: " + GestorDePuntos.obtenerPuntos());
 
             // 11) Avanzar a la siguiente pregunta o terminar
             idx++;
             if (idx < preguntas.size()) {
                 mostrarPregunta();
             } else {
+                // Mostrar mensaje final
+                Toast.makeText(this, "🏆 ¡Has completado todas las preguntas! 🎊", Toast.LENGTH_LONG).show();
                 finish();
             }
         };
@@ -112,10 +114,10 @@ public class PreguntasActivity extends AppCompatActivity {
      */
     private void mostrarPregunta() {
         Pregunta p = preguntas.get(idx);
-        tvPregunta.setText(p.getPregunta());
-        btnOpcion1.setText(p.getRespuestas().get(0));
-        btnOpcion2.setText(p.getRespuestas().get(1));
-        btnOpcion3.setText(p.getRespuestas().get(2));
-        btnOpcion4.setText(p.getRespuestas().get(3));
+        tvPregunta.setText("❓ " + p.getPregunta());
+        btnOpcion1.setText("🅰️ " + p.getRespuestas().get(0));
+        btnOpcion2.setText("🅱️ " + p.getRespuestas().get(1));
+        btnOpcion3.setText("🅲️ " + p.getRespuestas().get(2));
+        btnOpcion4.setText("🅳️ " + p.getRespuestas().get(3));
     }
 }

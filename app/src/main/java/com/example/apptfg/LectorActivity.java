@@ -51,6 +51,6 @@ public class LectorActivity extends AppCompatActivity {
     private void mostrarPagina() {
         Pagina p = paginas.get(paginaIndex);
         tvPagina.setText(p.getTexto());
-        tvPuntos.setText("Puntos: " + GestorDePuntos.obtenerPuntos());
+        tvPuntos.setText("⭐ Puntos: " + GestorDePuntos.obtenerPuntos());
     }
 }

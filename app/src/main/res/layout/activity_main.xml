@@ -5,72 +5,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
+    android:background="#FFF8E1"
     tools:context=".MainActivity">
 
-    <!-- Header con gradiente -->
+    <!-- Header simple -->
     <View
         android:id="@+id/headerBackground"
         android:layout_width="0dp"
         android:layout_height="160dp"
-        android:background="@drawable/gradient_header"
+        android:background="#FF9800"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Título de la biblioteca -->
+    <!-- Título -->
     <TextView
         android:id="@+id/tvTitleLibrary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="📚 Mi Biblioteca"
-        android:textSize="24sp"
+        android:text="📖 Bienvenido a tu biblioteca mágica"
+        android:textSize="26sp"
         android:textStyle="bold"
-        android:textColor="@android:color/white"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/baloo"
         app:layout_constraintTop_toTopOf="@id/headerBackground"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp" />
+        android:layout_marginTop="40dp" />
 
     <!-- Subtítulo -->
     <TextView
         android:id="@+id/tvSubtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Selecciona un libro para comenzar"
-        android:textSize="14sp"
-        android:textColor="@android:color/white"
-        android:alpha="0.8"
+        android:text="Elige un libro para comenzar 📚"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/baloo"
         app:layout_constraintTop_toBottomOf="@id/tvTitleLibrary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="4dp" />
 
-    <!-- Puntos actuales -->
+    <!-- Contador de puntos - ID CORREGIDO a tvPuntosMain -->
     <TextView
         android:id="@+id/tvPuntosMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Puntos: 0"
-        android:textSize="16sp"
+        android:text="⭐ Puntos: 0"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@android:color/white"
+        android:textColor="#FF6F00"
+        android:fontFamily="@font/baloo"
+        android:background="#FFFFFF"
+        android:padding="12dp"
         app:layout_constraintTop_toBottomOf="@id/tvSubtitle"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="12dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp" />
 
-    <!-- RecyclerView con mejoras visuales -->
+    <!-- Lista de libros -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvLibros"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="16dp"
         android:clipToPadding="false"
-        android:scrollbars="vertical"
-        app:layout_constraintTop_toBottomOf="@id/headerBackground"
+        app:layout_constraintTop_toBottomOf="@id/tvPuntosMain"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="8dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

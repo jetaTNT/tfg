@@ -34,7 +34,7 @@ public class LibrosAdapter extends RecyclerView.Adapter<LibrosAdapter.LibroViewH
         TextView tvTitulo;
         public LibroViewHolder(@NonNull View iv) {
             super(iv);
-            tvTitulo = iv.findViewById(R.id.tvTitulo);
+            tvTitulo = iv.findViewById(R.id.tvTituloLibro); // ID CORREGIDO
         }
     }
 }
