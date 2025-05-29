@@ -1,18 +1,19 @@
 package com.example.apptfg.modelos;
 
-
-/** Por si acabo haciendo que en un libro puedas
-*  cambiar la historia con opciones
- */
 public class Opcion {
     private String texto;
-    private int siguientePagina;
+    private int siguientePaginaId;
 
-    public Opcion(String texto, int siguientePagina) {
+    public Opcion(String texto, int siguientePaginaId) {
         this.texto = texto;
-        this.siguientePagina = siguientePagina;
+        this.siguientePaginaId = siguientePaginaId;
     }
 
-    public String getTexto() { return texto; }
-    public int getSiguientePagina() { return siguientePagina; }
+    public String getTexto() {
+        return texto;
+    }
+
+    public int getSiguientePaginaId() {
+        return siguientePaginaId;
+    }
 }

@@ -1,58 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="24dp"
     android:background="#FFF8E1">
 
     <TextView
         android:id="@+id/tvTotalPuntos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Puntos: 0"
-        android:textSize="20sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:text="⭐ Total de puntos: 0"
+        android:textSize="22sp"
+        android:textColor="#FFA000"
+        android:fontFamily="@font/baloo"
+        android:paddingBottom="16dp"/>
 
     <TextView
         android:id="@+id/tvPreguntasRespondidas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Preguntas respondidas: 0"
+        android:text="📋 Preguntas respondidas: 0"
         android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/tvTotalPuntos"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="16dp" />
+        android:paddingBottom="12dp"/>
 
     <TextView
         android:id="@+id/tvPreguntasCorrectas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Correctas: 0"
+        android:text="✅ Correctas: 0"
         android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/tvPreguntasRespondidas"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="12dp" />
+        android:paddingBottom="12dp"/>
 
     <TextView
         android:id="@+id/tvPreguntasIncorrectas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Incorrectas: 0"
+        android:text="❌ Incorrectas: 0"
         android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/tvPreguntasCorrectas"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="12dp" />
+        android:paddingBottom="24dp"/>
 
     <Button
         android:id="@+id/btnVolver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Volver"
-        app:layout_constraintTop_toBottomOf="@id/tvPreguntasIncorrectas"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="24dp" />
+        android:textSize="16sp"
+        android:backgroundTint="#FFC107"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

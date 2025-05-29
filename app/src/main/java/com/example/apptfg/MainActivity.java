@@ -13,11 +13,11 @@ import com.example.apptfg.modelos.Libro;
 import com.example.apptfg.util.GestorDePuntos;
 
 import java.util.List;
-import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity implements LibrosAdapter.OnLibroClickListener {
 
     private TextView tvPuntosMain;
+    private GestorDePuntos gestor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,37 +25,27 @@ public class MainActivity extends AppCompatActivity implements LibrosAdapter.OnL
         setContentView(R.layout.activity_main);
 
         tvPuntosMain = findViewById(R.id.tvPuntosMain);
+        RecyclerView rvLibros = findViewById(R.id.rvLibros);
+        Button btnStats = findViewById(R.id.btnStats);
 
-        // Lista de libros
-        RecyclerView rv = findViewById(R.id.rvLibros);
-        rv.setLayoutManager(new LinearLayoutManager(this));
+        rvLibros.setLayoutManager(new LinearLayoutManager(this));
 
         List<Libro> libros = LibroRepository.obtenerLibros();
         LibrosAdapter adapter = new LibrosAdapter(libros, this);
-        rv.setAdapter(adapter);
+        rvLibros.setAdapter(adapter);
 
-        // Botón de estadísticas
-        Button btnStats = findViewById(R.id.btnStats);
+        gestor = new GestorDePuntos(this);
+        actualizarPuntos();
+
         btnStats.setOnClickListener(v -> {
-            Intent intent = new Intent(this, StatsActivity.class);
+            Intent intent = new Intent(MainActivity.this, StatsActivity.class);
             startActivity(intent);
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        GestorDePuntos gestor = new GestorDePuntos(this);
-
-        Executors.newSingleThreadExecutor().execute(() -> {
-            int puntos = gestor.puntosActuales();
-
-            runOnUiThread(() -> {
-                tvPuntosMain.setText("⭐ Puntos: " + puntos);
-            });
-        });
+    private void actualizarPuntos() {
+        int puntos = gestor.puntosActuales();
+        tvPuntosMain.setText("\u2B50 Puntos: " + puntos);
     }
 
     @Override
@@ -63,5 +53,11 @@ public class MainActivity extends AppCompatActivity implements LibrosAdapter.OnL
         Intent intent = new Intent(this, LectorActivity.class);
         intent.putExtra("libroId", libro.getId());
         startActivity(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        actualizarPuntos();
     }
 }

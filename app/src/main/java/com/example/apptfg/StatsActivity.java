@@ -27,26 +27,30 @@ public class StatsActivity extends AppCompatActivity {
         tvPreguntasIncorrectas = findViewById(R.id.tvPreguntasIncorrectas);
         Button btnVolver = findViewById(R.id.btnVolver);
 
+        btnVolver.setOnClickListener(v -> {
+            finish();
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        });
+
+        cargarEstadisticas();
+    }
+
+    private void cargarEstadisticas() {
         PuntosDao puntosDao = AppDatabase.getInstance(this).puntosDao();
 
         Executors.newSingleThreadExecutor().execute(() -> {
             Puntos puntos = puntosDao.obtenerPuntos();
-            int total = (puntos != null) ? puntos.getCantidad() : 0;
-            int respondidas = (puntos != null) ? puntos.getPreguntasRespondidas() : 0;
-            int correctas = (puntos != null) ? puntos.getPreguntasCorrectas() : 0;
+            int total = puntos != null ? puntos.getCantidad() : 0;
+            int respondidas = puntos != null ? puntos.getPreguntasRespondidas() : 0;
+            int correctas = puntos != null ? puntos.getPreguntasCorrectas() : 0;
             int incorrectas = respondidas - correctas;
 
             runOnUiThread(() -> {
-                tvTotalPuntos.setText("Puntos: " + total);
-                tvPreguntasRespondidas.setText("Preguntas respondidas: " + respondidas);
-                tvPreguntasCorrectas.setText("Correctas: " + correctas);
-                tvPreguntasIncorrectas.setText("Incorrectas: " + incorrectas);
+                tvTotalPuntos.setText("⭐ Total de puntos: " + total);
+                tvPreguntasRespondidas.setText("📋 Preguntas respondidas: " + respondidas);
+                tvPreguntasCorrectas.setText("✅ Respuestas correctas: " + correctas);
+                tvPreguntasIncorrectas.setText("❌ Respuestas incorrectas: " + incorrectas);
             });
-        });
-
-        btnVolver.setOnClickListener(v -> {
-            finish();
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
     }
 }

@@ -1,20 +1,27 @@
 package com.example.apptfg.modelos;
 
-/**
- * Representa una página.
- */
-public class Pagina {
-    private int numero;
-    private String texto;
-    // Opcional: recurso de imagen para la página
-    private int imagenResId;
+import java.util.List;
 
-    public Pagina(int numero, String texto, int imagenResId) {
-        this.numero = numero;
+public class Pagina {
+    private int id;
+    private String texto;
+    private List<Opcion> opciones; // NUEVO
+
+    public Pagina(int id, String texto, List<Opcion> opciones) {
+        this.id = id;
         this.texto = texto;
-        this.imagenResId = imagenResId;
+        this.opciones = opciones;
     }
-    public int getNumero() { return numero; }
-    public String getTexto() { return texto; }
-    public int getImagenResId() { return imagenResId; }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getTexto() {
+        return texto;
+    }
+
+    public List<Opcion> getOpciones() {
+        return opciones;
+    }
 }

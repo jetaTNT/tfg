@@ -1,11 +1,11 @@
 package com.example.apptfg;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,83 +16,103 @@ import java.util.List;
 
 public class PreguntasActivity extends AppCompatActivity {
 
-    private int libroId;
-    private int idx = 0;
     private List<Pregunta> preguntas;
+    private int preguntaIndex = 0;
 
-    private TextView tvPuntos;
-    private TextView tvPregunta;
-    private Button btnOpcion1;
-    private Button btnOpcion2;
-    private Button btnOpcion3;
-    private Button btnOpcion4;
-
-    private GestorDePuntos gestorDePuntos;
+    private TextView tvPregunta, tvTemporizador;
+    private LinearLayout opcionesContainer;
+    private GestorDePuntos gestor;
+    private CountDownTimer temporizador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preguntas);
 
-        libroId = getIntent().getIntExtra("libroId", -1);
-        if (libroId == -1) {
-            Log.e("PreguntasActivity", "ID de libro no recibido");
-            finish();
-            return;
+        int paginaFinalId = getIntent().getIntExtra("paginaFinalId", -1);
+        if (paginaFinalId == -1) {
+            finish(); return;
         }
 
-        gestorDePuntos = new GestorDePuntos(this);
+        preguntas = PreguntaRepository.obtenerPreguntasPorPaginaFinal(paginaFinalId);
+        gestor = new GestorDePuntos(this);
 
-        tvPuntos = findViewById(R.id.tvPuntos);
         tvPregunta = findViewById(R.id.tvPregunta);
-        btnOpcion1 = findViewById(R.id.btnOpcion1);
-        btnOpcion2 = findViewById(R.id.btnOpcion2);
-        btnOpcion3 = findViewById(R.id.btnOpcion3);
-        btnOpcion4 = findViewById(R.id.btnOpcion4);
+        tvTemporizador = findViewById(R.id.tvTemporizador);
+        opcionesContainer = findViewById(R.id.opcionesContainer);
 
-        preguntas = PreguntaRepository.obtenerPreguntas(libroId);
-        if (preguntas.isEmpty()) {
-            Log.e("PreguntasActivity", "No hay preguntas para el libro " + libroId);
-            finish();
-            return;
-        }
-
-        actualizarVista();
-
-        View.OnClickListener listener = v -> {
-            String respuesta = ((Button) v).getText().toString();
-            Pregunta preguntaActual = preguntas.get(idx);
-
-            boolean esCorrecta = respuesta.equals(preguntaActual.getOpcionCorrecta());
-            gestorDePuntos.registrarPreguntaRespondida(esCorrecta);
-
-            Toast.makeText(this,
-                    esCorrecta ? "¡Correcto!" : "Incorrecto. Era: " + preguntaActual.getOpcionCorrecta(),
-                    Toast.LENGTH_SHORT).show();
-
-            idx++;
-            if (idx < preguntas.size()) {
-                actualizarVista();
-            } else {
-                Toast.makeText(this, "Has respondido todas las preguntas", Toast.LENGTH_LONG).show();
-                finish();
-            }
-        };
-
-        btnOpcion1.setOnClickListener(listener);
-        btnOpcion2.setOnClickListener(listener);
-        btnOpcion3.setOnClickListener(listener);
-        btnOpcion4.setOnClickListener(listener);
+        mostrarPregunta();
     }
 
-    private void actualizarVista() {
-        Pregunta pregunta = preguntas.get(idx);
-        tvPregunta.setText(pregunta.getEnunciado());
-        btnOpcion1.setText(pregunta.getOpcion1());
-        btnOpcion2.setText(pregunta.getOpcion2());
-        btnOpcion3.setText(pregunta.getOpcion3());
-        btnOpcion4.setText(pregunta.getOpcion4());
+    private void mostrarPregunta() {
+        if (preguntaIndex >= preguntas.size()) {
+            finish(); return;
+        }
 
-        tvPuntos.setText("⭐ Puntos: " + gestorDePuntos.puntosActuales());
+        Pregunta p = preguntas.get(preguntaIndex);
+        tvPregunta.setText(p.getTexto());
+        opcionesContainer.removeAllViews(); // Limpia botones anteriores
+
+        // Crea botones dinámicamente
+        for (int i = 0; i < p.getOpciones().size(); i++) {
+            Button btn = new Button(this);
+            btn.setText(p.getOpciones().get(i));
+            btn.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT));
+            int finalI = i;
+            btn.setOnClickListener(v -> {
+                detenerTemporizador();
+                evaluarRespuesta(finalI == p.getRespuestaCorrecta());
+            });
+            opcionesContainer.addView(btn);
+        }
+
+        iniciarTemporizador();
+    }
+
+    private void evaluarRespuesta(boolean esCorrecta) {
+        gestor.registrarPreguntaRespondida(esCorrecta);
+        preguntaIndex++;
+        mostrarPregunta();
+    }
+
+    private void iniciarTemporizador() {
+        tvTemporizador.setText("Tiempo: 10");
+        temporizador = new CountDownTimer(10000, 1000) {
+            int tiempo = 10;
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                tiempo--;
+                tvTemporizador.setText("Tiempo: " + tiempo);
+            }
+
+            @Override
+            public void onFinish() {
+                // Tiempo agotado: cuenta como incorrecto
+                deshabilitarOpciones();
+                evaluarRespuesta(false);
+            }
+        }.start();
+    }
+
+    private void detenerTemporizador() {
+        if (temporizador != null) {
+            temporizador.cancel();
+        }
+    }
+
+    private void deshabilitarOpciones() {
+        for (int i = 0; i < opcionesContainer.getChildCount(); i++) {
+            View child = opcionesContainer.getChildAt(i);
+            child.setEnabled(false);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        detenerTemporizador();
     }
 }

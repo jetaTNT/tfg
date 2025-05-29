@@ -4,16 +4,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.apptfg.modelos.Libro;
+
 import java.util.List;
 
 public class LibrosAdapter extends RecyclerView.Adapter<LibrosAdapter.LibroViewHolder> {
-    public interface OnLibroClickListener { void onLibroClick(Libro libro); }
-    private List<Libro> libros;
-    private OnLibroClickListener listener;
-    public LibrosAdapter(List<Libro> libros, OnLibroClickListener l) { this.libros = libros; this.listener = l; }
+
+    public interface OnLibroClickListener {
+        void onLibroClick(Libro libro);
+    }
+
+    private final List<Libro> libros;
+    private final OnLibroClickListener listener;
+
+    public LibrosAdapter(List<Libro> libros, OnLibroClickListener listener) {
+        this.libros = libros;
+        this.listener = listener;
+    }
 
     @NonNull
     @Override
@@ -24,17 +35,22 @@ public class LibrosAdapter extends RecyclerView.Adapter<LibrosAdapter.LibroViewH
 
     @Override
     public void onBindViewHolder(@NonNull LibroViewHolder holder, int position) {
-        Libro lib = libros.get(position);
-        holder.tvTitulo.setText(lib.getTitulo());
-        holder.itemView.setOnClickListener(v -> listener.onLibroClick(lib));
+        Libro libro = libros.get(position);
+        holder.tvTitulo.setText(libro.getTitulo());
+        holder.itemView.setOnClickListener(v -> listener.onLibroClick(libro));
     }
 
-    @Override public int getItemCount() { return libros.size(); }
+    @Override
+    public int getItemCount() {
+        return libros.size();
+    }
+
     static class LibroViewHolder extends RecyclerView.ViewHolder {
         TextView tvTitulo;
-        public LibroViewHolder(@NonNull View iv) {
-            super(iv);
-            tvTitulo = iv.findViewById(R.id.tvTituloLibro); // ID CORREGIDO
+
+        public LibroViewHolder(@NonNull View itemView) {
+            super(itemView);
+            tvTitulo = itemView.findViewById(R.id.tvTituloLibro);
         }
     }
 }

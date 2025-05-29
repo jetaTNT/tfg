@@ -1,121 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF3E0">
+    android:padding="16dp"
+    android:background="#FFFDE7">
 
-    <!-- Contador de puntos -->
-    <TextView
-        android:id="@+id/tvPuntos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="⭐ Puntos: 0"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="#FF6F00"
-        android:fontFamily="@font/baloo"
-        android:background="#FFFFFF"
-        android:padding="10dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp" />
-
-    <!-- Pregunta -->
     <TextView
         android:id="@+id/tvPregunta"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="❓ ¿Cuál es la respuesta correcta?"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="#4E342E"
-        android:fontFamily="@font/baloo"
-        android:padding="24dp"
-        android:gravity="center"
-        android:lineSpacingExtra="4dp"
-        app:layout_constraintTop_toBottomOf="@id/tvPuntos"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        android:text="Pregunta"
+        android:textSize="20sp"
+        android:paddingBottom="20dp"/>
 
-    <!-- Contenedor de opciones - BOTONES AGREGADOS -->
     <LinearLayout
-        android:id="@+id/layoutOpciones"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:id="@+id/opcionesContainer"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/tvPregunta"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-        <!-- Opción 1 -->
-        <Button
-            android:id="@+id/btnOpcion1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:text="🅰️ Opción 1"
-            android:textSize="16sp"
-            android:textAllCaps="false"
-            android:fontFamily="@font/baloo"
-            android:backgroundTint="#FFE0B2"
-            android:textColor="#5D4037"
-            android:padding="16dp"
-            android:minHeight="60dp"
-            app:cornerRadius="20dp" />
-
-        <!-- Opción 2 -->
-        <Button
-            android:id="@+id/btnOpcion2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:text="🅱️ Opción 2"
-            android:textSize="16sp"
-            android:textAllCaps="false"
-            android:fontFamily="@font/baloo"
-            android:backgroundTint="#FFE0B2"
-            android:textColor="#5D4037"
-            android:padding="16dp"
-            android:minHeight="60dp"
-            app:cornerRadius="20dp" />
-
-        <!-- Opción 3 -->
-        <Button
-            android:id="@+id/btnOpcion3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:text="🅲️ Opción 3"
-            android:textSize="16sp"
-            android:textAllCaps="false"
-            android:fontFamily="@font/baloo"
-            android:backgroundTint="#FFE0B2"
-            android:textColor="#5D4037"
-            android:padding="16dp"
-            android:minHeight="60dp"
-            app:cornerRadius="20dp" />
-
-        <!-- Opción 4 -->
-        <Button
-            android:id="@+id/btnOpcion4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="🅳️ Opción 4"
-            android:textSize="16sp"
-            android:textAllCaps="false"
-            android:fontFamily="@font/baloo"
-            android:backgroundTint="#FFE0B2"
-            android:textColor="#5D4037"
-            android:padding="16dp"
-            android:minHeight="60dp"
-            app:cornerRadius="20dp" />
-
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tvTemporizador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tiempo: 10"
+        android:paddingTop="20dp"
+        android:textSize="18sp"/>
+</LinearLayout>
