@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ToolbarTitleStyle" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="Theme.AppTFG" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- tus items… -->
+    </style>
+
+    <!-- Nuevo tema sin ActionBar -->
+    <style name="Theme.AppTFG.NoActionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- copia aquí los mismos items (colors, shapes…) que en Theme.AppTFG -->
+    </style>
+</resources>
