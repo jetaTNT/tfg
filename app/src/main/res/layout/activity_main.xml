@@ -8,7 +8,7 @@
     android:background="#FFF8E1"
     tools:context=".MainActivity">
 
-    <!-- Header simple -->
+    <!-- Header visual -->
     <View
         android:id="@+id/headerBackground"
         android:layout_width="0dp"
@@ -24,57 +24,44 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="📖 Bienvenido a tu biblioteca mágica"
-        android:textSize="26sp"
-        android:textStyle="bold"
+        android:textSize="20sp"
         android:textColor="#FFFFFF"
-        android:fontFamily="@font/baloo"
-        app:layout_constraintTop_toTopOf="@id/headerBackground"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="40dp" />
+        android:layout_marginStart="16dp" />
 
-    <!-- Subtítulo -->
-    <TextView
-        android:id="@+id/tvSubtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Elige un libro para comenzar 📚"
-        android:textSize="18sp"
-        android:textColor="#FFFFFF"
-        android:fontFamily="@font/baloo"
-        app:layout_constraintTop_toBottomOf="@id/tvTitleLibrary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="4dp" />
-
-    <!-- Contador de puntos - ID CORREGIDO a tvPuntosMain -->
+    <!-- Puntos -->
     <TextView
         android:id="@+id/tvPuntosMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="⭐ Puntos: 0"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="#FF6F00"
-        android:fontFamily="@font/baloo"
-        android:background="#FFFFFF"
-        android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@id/tvSubtitle"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp" />
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleLibrary"
+        app:layout_constraintStart_toStartOf="@id/tvTitleLibrary"
+        android:layout_marginTop="8dp" />
+
+    <!-- Botón de estadísticas -->
+    <Button
+        android:id="@+id/btnStats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ver estadísticas"
+        app:layout_constraintTop_toBottomOf="@id/tvPuntosMain"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="16dp" />
 
     <!-- Lista de libros -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvLibros"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="16dp"
-        android:clipToPadding="false"
-        app:layout_constraintTop_toBottomOf="@id/tvPuntosMain"
+        app:layout_constraintTop_toBottomOf="@id/headerBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

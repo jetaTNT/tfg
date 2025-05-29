@@ -2,6 +2,7 @@ package com.example.apptfg;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,8 +13,10 @@ import com.example.apptfg.modelos.Libro;
 import com.example.apptfg.util.GestorDePuntos;
 
 import java.util.List;
+import java.util.concurrent.Executors;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LibrosAdapter.OnLibroClickListener {
+
     private TextView tvPuntosMain;
 
     @Override
@@ -21,38 +24,44 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // 1) Inicializa Room para puntos
-        GestorDePuntos.init(this);
-
-        // 2) Vincula y muestra el contador
         tvPuntosMain = findViewById(R.id.tvPuntosMain);
-        actualizarPuntos();
 
-        // 3) Configura la lista de libros
+        // Lista de libros
         RecyclerView rv = findViewById(R.id.rvLibros);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        List<Libro> lista = LibroRepository.obtenerLibros();
-        rv.setAdapter(new LibrosAdapter(lista, libro -> {
-            // Si quieres, puedes resetear al inicio de cada libro:
-            // GestorDePuntos.reset();
-            actualizarPuntos();
 
-            // Lanzar LectorActivity
-            Intent i = new Intent(MainActivity.this, LectorActivity.class);
-            i.putExtra("libroId", libro.getId());
-            startActivity(i);
-        }));
+        List<Libro> libros = LibroRepository.obtenerLibros();
+        LibrosAdapter adapter = new LibrosAdapter(libros, this);
+        rv.setAdapter(adapter);
+
+        // Botón de estadísticas
+        Button btnStats = findViewById(R.id.btnStats);
+        btnStats.setOnClickListener(v -> {
+            Intent intent = new Intent(this, StatsActivity.class);
+            startActivity(intent);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        // Al volver de PreguntasActivity, recarga el total
-        actualizarPuntos();
+
+        GestorDePuntos gestor = new GestorDePuntos(this);
+
+        Executors.newSingleThreadExecutor().execute(() -> {
+            int puntos = gestor.puntosActuales();
+
+            runOnUiThread(() -> {
+                tvPuntosMain.setText("⭐ Puntos: " + puntos);
+            });
+        });
     }
 
-    private void actualizarPuntos() {
-        int pts = GestorDePuntos.obtenerPuntos();
-        tvPuntosMain.setText("⭐ Puntos: " + pts);
+    @Override
+    public void onLibroClick(Libro libro) {
+        Intent intent = new Intent(this, LectorActivity.class);
+        intent.putExtra("libroId", libro.getId());
+        startActivity(intent);
     }
 }

@@ -1,22 +1,26 @@
 package com.example.apptfg.modelos;
 
-import java.util.List;
-
-/**
- * Representa las preguntas de despues del libro
- */
 public class Pregunta {
-    private String pregunta;
-    private List<String> respuestas;
-    private int correcta; // índice 0-based
+    private String enunciado;
+    private String opcion1;
+    private String opcion2;
+    private String opcion3;
+    private String opcion4;
+    private String opcionCorrecta;
 
-    public Pregunta(String pregunta, List<String> respuestas, int correcta) {
-        this.pregunta = pregunta;
-        this.respuestas = respuestas;
-        this.correcta = correcta;
+    public Pregunta(String enunciado, String opcion1, String opcion2, String opcion3, String opcion4, String opcionCorrecta) {
+        this.enunciado = enunciado;
+        this.opcion1 = opcion1;
+        this.opcion2 = opcion2;
+        this.opcion3 = opcion3;
+        this.opcion4 = opcion4;
+        this.opcionCorrecta = opcionCorrecta;
     }
 
-    public String getPregunta() { return pregunta; }
-    public List<String> getRespuestas() { return respuestas; }
-    public int getCorrecta() { return correcta; }
+    public String getEnunciado() { return enunciado; }
+    public String getOpcion1() { return opcion1; }
+    public String getOpcion2() { return opcion2; }
+    public String getOpcion3() { return opcion3; }
+    public String getOpcion4() { return opcion4; }
+    public String getOpcionCorrecta() { return opcionCorrecta; }
 }
