@@ -1,46 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#FFFDE7"
-    tools:context=".LectorActivity">
+    android:background="@color/reading_background">
 
-    <TextView
-        android:id="@+id/tvPuntos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="\u2B50 Puntos: 0"
-        android:textSize="18sp"
-        android:textColor="#FFA000"
-        android:layout_marginBottom="12dp"
-        android:fontFamily="@font/baloo" />
-
-    <TextView
-        android:id="@+id/tvPagina"
+    <!-- Toolbar superior -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar_lector"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:text="Aquí irá el texto de la página..."
-        android:textSize="20sp"
-        android:textColor="#5D4037"
-        android:fontFamily="@font/baloo" />
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:titleTextColor="@color/white"
+        app:navigationIconTint="@color/white" />
 
-    <LinearLayout
-        android:id="@+id/layoutOpciones"
+    <!-- Contenido desplazable de la pantalla -->
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="16dp" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <Button
-        android:id="@+id/btnSiguiente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Siguiente"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-</LinearLayout>
+            <!-- Texto de puntos acumulados (usa textAppearanceBody1 en vez de Widget.MaterialComponents.TextView.Body1) -->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvPuntosLector"
+                style="?attr/textAppearanceBody1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/primary_color"
+                android:padding="8dp"
+                android:text="@string/puntos_main_init"
+                android:textColor="@color/white"
+                android:elevation="2dp" />
+
+            <!-- Card que contiene el texto de la página -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/card_background">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvTextoPagina"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    style="?attr/textAppearanceBody1"
+                    android:text="Texto de la página"
+                    android:textColor="@color/primary_text" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Contenedor donde se añadirán dinámicamente los botones de opción -->
+            <LinearLayout
+                android:id="@+id/opcionesContainer"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:divider="@color/divider_color"
+                android:showDividers="middle" />
+
+            <!-- Botón para ir al cuestionario (inicialmente oculto) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnVerPreguntas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="24dp"
+                android:text="@string/ver_preguntas"
+                android:visibility="gone" />
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

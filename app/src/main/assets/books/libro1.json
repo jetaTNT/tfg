@@ -1,0 +1,107 @@
+{
+  "id": 1,
+  "titulo": "La Aventura de Leo – El Bosque Encantado",
+  "paginas": [
+    {
+      "id": 1,
+      "texto": "Leo estaba de pie frente al gran portón del bosque. Las hojas susurraban a su alrededor y un suave viento movía las ramas como si lo invitaran a entrar.",
+      "opciones": [
+        {
+          "texto": "Entra con cuidado",
+          "siguientePaginaId": 2
+        },
+        {
+          "texto": "Grita “¡Hola!”",
+          "siguientePaginaId": 3
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "texto": "Al avanzar, encontró un sendero iluminado por luciérnagas que parecían brillar especialmente para él. El murmullo del bosque se hacía más intenso.",
+      "opciones": [
+        {
+          "texto": "Seguir el sendero brillante",
+          "siguientePaginaId": 4
+        },
+        {
+          "texto": "Buscar otro camino",
+          "siguientePaginaId": 5
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "texto": "Leo gritó “¡Hola!” tan fuerte que su voz retumbó entre los árboles. De inmediato, un búho enorme alzó el vuelo y se acaracoló en las copas. Pero no vio a nadie más.",
+      "opciones": [
+        {
+          "texto": "Caminar hacia el búho",
+          "siguientePaginaId": 5
+        },
+        {
+          "texto": "Callarse y observar",
+          "siguientePaginaId": 4
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "texto": "El sendero lo llevó hasta una cabaña antigua y cubierta de musgo. Al acercarse, vio que la puerta estaba entreabierta y, dentro, un libro antiguo brillaba con una luz propia.",
+      "opciones": [
+        {
+          "texto": "Entrar en la cabaña",
+          "siguientePaginaId": 6
+        },
+        {
+          "texto": "Volver atrás",
+          "siguientePaginaId": 5
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "texto": "Decidió dar media vuelta, sintiendo que el bosque se cerraba a su alrededor. Cada paso lo alejaba, pero de pronto, una mano suave tocó su hombro y escuchó una voz cantarina.",
+      "opciones": [
+        {
+          "texto": "Quedarse quieto",
+          "siguientePaginaId": 4
+        },
+        {
+          "texto": "Salir corriendo",
+          "siguientePaginaId": 7
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "texto": "Dentro de la cabaña, descubrió un mapa antiguo que señalaba la ubicación de un tesoro escondido. Sabía que debía seguirlo si quería hallar la salida del bosque.",
+      "opciones": []
+    },
+    {
+      "id": 7,
+      "texto": "Al huir, tropezó con una raíz enorme y cayó al suelo. Se dio cuenta de que el bosque no lo dejaba ir tan fácilmente. Había perdido su camino para siempre.",
+      "opciones": []
+    }
+  ],
+
+  "preguntas": [
+    {
+      "id": 1,
+      "texto": "¿Cómo se llamaba el protagonista de la historia?",
+      "opciones": ["Leo", "Lola", "Luis"],
+      "respuestaCorrectaIndex": 0
+    },
+    {
+      "id": 2,
+      "texto": "¿Qué encontró Leo dentro de la cabaña?",
+      "opciones": ["Un mapa antiguo", "Un cofre vacío", "Una linterna"],
+      "respuestaCorrectaIndex": 0
+    },
+    {
+      "id": 3,
+      "texto": "¿Por qué decidió no seguir al búho inmediatamente después de gritar?",
+      "opciones": ["Quería observar primero", "Tenía miedo", "No oyó al búho"],
+      "respuestaCorrectaIndex": 0
+    }
+  ]
+}

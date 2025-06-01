@@ -1,26 +1,19 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <color name="purple_200">#BB86FC</color>
-    <color name="purple_500">#6200EE</color>
-    <color name="purple_700">#3700B3</color>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
     <color name="teal_200">#03DAC5</color>
     <color name="teal_700">#018786</color>
-    <color name="black">#000000</color>
+    <color name="primary_color">#FF9800</color>
+    <color name="primary_dark">#F57C00</color>
+    <color name="accent_color">#FFC107</color>
     <color name="white">#FFFFFF</color>
-    <color name="primary_color">#2196F3</color>
-    <color name="primary_dark">#1976D2</color>
-    <color name="accent_color">#FF9800</color>
-
-    <!-- Colores de fondo -->
+    <color name="black">#000000</color>
     <color name="background_color">#F5F5F5</color>
     <color name="card_background">#FFFFFF</color>
     <color name="reading_background">#FAFAFA</color>
     <color name="quiz_background">#F0F4FF</color>
-
-    <!-- Colores de texto -->
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#757575</color>
-
-    <!-- Otros colores -->
-    <color name="progress_track">#E0E0E0</color>
-    <color name="divider_color">#BDBDBD</color>
+    <color name="divider_color">#E0E0E0</color>
+    <color name="correct_green">#C8E6C9</color>
+    <color name="incorrect_red">#FFCDD2</color>
 </resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="teal_200">#03DAC5</color>
+    <color name="teal_700">#018786</color>
+    <color name="primary_color">#FFB74D</color>
+    <color name="primary_dark">#FF8A65</color>
+    <color name="accent_color">#FFD54F</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="background_color">#121212</color>
+    <color name="card_background">#1E1E1E</color>
+    <color name="reading_background">#1B1B1B</color>
+    <color name="quiz_background">#1E2530</color>
+    <color name="primary_text">#E0E0E0</color>
+    <color name="secondary_text">#B0B0B0</color>
+    <color name="divider_color">#373737</color>
+    <color name="correct_green">#388E3C</color>
+    <color name="incorrect_red">#D32F2F</color>
+</resources>

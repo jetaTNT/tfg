@@ -1,53 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator_stats"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
-    android:padding="24dp"
-    android:background="#FFF8E1">
+    android:background="@color/background_color"
+    tools:context=".ui.stats.StatsActivity">
 
-    <TextView
-        android:id="@+id/tvTotalPuntos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="⭐ Total de puntos: 0"
-        android:textSize="22sp"
-        android:textColor="#FFA000"
-        android:fontFamily="@font/baloo"
-        android:paddingBottom="16dp"/>
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar_stats"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/primary_color"
+        android:titleTextColor="@color/white"
+        android:title="estadisticas" />
 
-    <TextView
-        android:id="@+id/tvPreguntasRespondidas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="📋 Preguntas respondidas: 0"
-        android:textSize="18sp"
-        android:paddingBottom="12dp"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tvPreguntasCorrectas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="✅ Correctas: 0"
-        android:textSize="18sp"
-        android:paddingBottom="12dp"/>
+        <!-- Solo mostramos puntos totales -->
+        <TextView
+            android:id="@+id/tvPuntosTotalesStats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="puntos_totales"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:fontFamily="@font/baloo" />
 
-    <TextView
-        android:id="@+id/tvPreguntasIncorrectas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="❌ Incorrectas: 0"
-        android:textSize="18sp"
-        android:paddingBottom="24dp"/>
 
-    <Button
-        android:id="@+id/btnVolver"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Volver"
-        android:textSize="16sp"
-        android:backgroundTint="#FFC107"/>
-
-</LinearLayout>
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

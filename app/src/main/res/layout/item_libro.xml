@@ -1,69 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_libro"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="12dp"
-    card_view:cardCornerRadius="24dp"
-    card_view:cardElevation="8dp"
-    card_view:cardBackgroundColor="#FFF3E0"
-    android:foreground="?android:attr/selectableItemBackground"
-    android:clickable="true"
-    android:focusable="true">
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="@color/card_background">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="20dp"
-        android:gravity="center_vertical">
+        android:padding="12dp">
 
-        <!-- Icono libro -->
-        <TextView
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:text="📚"
-            android:textSize="32sp"
-            android:gravity="center"
-            android:background="#FFFFFF"
-            android:layout_marginEnd="16dp"
-            android:elevation="2dp"
-            android:padding="8dp"
-            android:textAlignment="center" />
+        <!-- Se reemplaza ic_book inexistente por un drawable del sistema -->
+        <ImageView
+            android:id="@+id/ivPortada"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:src="@android:drawable/ic_menu_agenda"
+            android:contentDescription="@string/portada_libro" />
 
-        <LinearLayout
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvTituloLibro"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_marginStart="12dp"
+            android:text="Título del libro"
+            style="?attr/textAppearanceHeadline6"
+            android:textColor="@color/primary_text"/>
 
-            <TextView
-                android:id="@+id/tvTituloLibro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nombre del Libro"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:textColor="#4E342E"
-                android:fontFamily="@font/baloo" />
+        <!-- Se reemplaza ic_chevron_right por un drawable del sistema -->
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:src="@android:drawable/ic_media_next"
+            android:contentDescription="@string/ir_adelante" />
 
-            <TextView
-                android:id="@+id/tvDescripcionLibro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Una breve aventura infantil llena de magia y decisiones."
-                android:textSize="16sp"
-                android:textColor="#6D4C41"
-                android:fontFamily="@font/baloo"
-                android:layout_marginTop="6dp" />
-        </LinearLayout>
-
-        <!-- Flecha indicadora -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="👉"
-            android:textSize="24sp"
-            android:layout_marginStart="12dp" />
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

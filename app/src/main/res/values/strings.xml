@@ -1,3 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">appTFG</string>
+    <string name="app_name">Lectura Interactiva</string>
+    <string name="titulo_main">Elige tu cuento</string>
+    <string name="no_libros_disponibles">No hay cuentos disponibles.</string>
+    <string name="puntos_main_init">⭐ Puntos: 0</string>
+    <string name="puntos_main">%1$d Puntos</string>
+    <string name="ir_adelante">Ir al detalle</string>
+    <string name="titulo_lector">¡Lee el cuento!</string>
+    <string name="ver_preguntas">Ver preguntas</string>
+    <string name="titulo_quiz">Responde las preguntas</string>
+    <string name="tiempo_restante">Tiempo: %1$d s</string>
+    <string name="tiempo_restante_init">Tiempo: 10 s</string>
+    <string name="titulo_stats">¡Estadísticas!</string>
+    <string name="total_puntos_init">⭐ Total de puntos: 0</string>
+    <string name="total_puntos">⭐ Total de puntos: %1$d</string>
+    <string name="respondidas_init">📋 Respondidas: 0</string>
+    <string name="respondidas">📋 Respondidas: %1$d</string>
+    <string name="correctas_init">✅ Correctas: 0</string>
+    <string name="correctas">✅ Correctas: %1$d</string>
+    <string name="incorrectas_init">❌ Incorrectas: 0</string>
+    <string name="incorrectas">❌ Incorrectas: %1$d</string>
+    <string name="volver">Volver</string>
+    <string name="respondidas_icon">Preguntas respondidas</string>
+    <string name="correctas_icon">Preguntas correctas</string>
+    <string name="incorrectas_icon">Preguntas incorrectas</string>
+    <string name="portada_libro">Portada del libro</string>
 </resources>
